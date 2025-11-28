@@ -1,0 +1,56 @@
+body {
+    background: rgb(198, 218, 218);
+}
+
+.header-logo {
+    display: block;
+    margin: 0 auto;         /* centers the image */
+    width: 370px;           /* adjust size */
+    height: 100px;
+    padding: 10px 0;
+}
+
+/* NAVBAR STYLING */
+/* navbar container */
+.navbar {
+    background-color: #9faba0;
+    padding: 1px;
+    position: relative;
+}
+
+/* hamburger icon */
+.nav-toggle {
+    font-size: 28px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* menu list styling */
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none; /* hidden at start */
+    flex-direction: column;
+    gap: 15px;
+    background-color: #29272740;
+    padding: 15px 10px;
+}
+
+.nav-menu li a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.nav-menu li a:hover {
+    color: #833734;
+}
+
+/* when active, show menu */
+.nav-menu.active {
+    display: flex;
+}
+

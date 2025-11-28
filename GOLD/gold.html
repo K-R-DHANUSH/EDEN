@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDEN WEBSITE</title>
+    <link rel="stylesheet" href="gold.css">
+</head>
+<body>
+
+<header>
+    <img src="../assets/EDEN_COMPANY_LEDGER_NOBACKGROUNG.png" alt="EDEN Logo" class="header-logo">
+</header>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-header">
+        <button id="navToggle" class="nav-toggle">☰</button>
+    </div>
+
+    <ul class="nav-menu" id="navMenu">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="GOLD/gold.html">Gold</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+<section id="gold-rates">
+
+    <h2 class="live-gold-heading">LIVE GOLD RATES</h2>
+
+    <div class="table-container">
+        <!-- 24K TABLE -->
+        <table id="goldTable24K">
+            <thead>
+                <tr>
+                    <th>Type 24k</th>
+                    <th>Price (INR ₹)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td colspan="2">Loading...</td></tr>
+            </tbody>
+        </table>
+
+        <!-- 22K TABLE -->
+        <table id="goldTable22K">
+            <thead>
+                <tr>
+                    <th>Type 22k</th>
+                    <th>Price (INR ₹)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td colspan="2">Loading...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- GOLD + INVESTMENT SECTION -->
+    <section id="gold-investment-section">
+        <div class="investment-container">
+
+            <!-- LEFT COLUMN -->
+            <div class="left-column">
+                <div id="goldCalculator">
+                    <h2>Gold Calculator (Two-Way)</h2>
+
+                    <label>Amount (₹):</label>
+                    <input type="number" id="amountField" placeholder="Enter amount">
+
+                    <label>Grams:</label>
+                    <input type="number" id="gramsField" placeholder="Enter grams" step="0.01">
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="right-column">
+                <div id="investmentInputs">
+                    <h2>Investment Planner</h2>
+
+                    <label>Gold Type:</label>
+                    <select id="investmentGoldType">
+                        <option value="24k">24K</option>
+                        <option value="22k">22K</option>
+                    </select>
+
+                    <label>Investment Amount (₹):</label>
+                    <input type="number" id="investmentAmount" placeholder="Enter investment amount">
+
+                    <label>Tenure (Years):</label>
+                    <input type="number" id="tenureYears" placeholder="Enter tenure">
+
+                    <!-- Periodic increments container -->
+                        <div id="periodicSection">
+                        <h3>Periodic Increments</h3>
+                        <div id="periodicList"></div>
+                        <button id="addPeriodicBtn" class="download-btn">+ Add Periodic Increment</button>
+                        </div>
+
+                    <!-- MULTIPLE LUMPSUM SECTION -->
+                    <div id="lumpsumSection">
+                        <h3 class="lumpsum-title">Lumpsum Investments</h3>
+
+                    <div id="lumpsumList"></div>
+
+                    <button type="button" id="addLumpsumBtn" class="btn-add-lumpsum">
+                    + Add Lumpsum Entry
+                    </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div><!-- end investment container -->
+    </section>
+
+    <!-- RESULTS SECTION -->
+    <div id="investmentResults" class="centered-container">
+    <div id="resultBox">
+        <p>Total Invested Amount: <span id="totalInvested"></span></p>
+        <p>Total Gold Accumulated: <span id="totalGold"></span></p>
+    </div>
+    </div>
+
+    <!-- REPORT TABLE -->
+    <div id="investmentReportContainer" class="centered-container">
+    <button id="downloadReportBtn" class="download-btn">Download Report (Excel)</button>
+
+    <table id="investmentReportTable">
+        <thead>
+            <tr>
+                <th>Month / Year</th>
+                <th>Grams Purchased</th>
+                <th>Value</th>
+                <th>Periodic Increment (₹)</th>
+                <th>Lumpsum (₹)</th>
+            </tr>
+        </thead>
+        <tbody id="reportBody"></tbody>
+    </table>
+    </div>
+
+    <div id="reportChartContainer">
+        <h2>Investment Trend Graph</h2>
+        <canvas id="investmentChart"></canvas>
+    </div>
+
+</section>
+
+<footer>
+    <p>&copy; 2025 Sample Page. All rights reserved.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="gold.js"></script>
+
+</body>
+</html>
