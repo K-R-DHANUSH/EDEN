@@ -1,3 +1,5 @@
+const API_URL = "https://eden-m2qz.onrender.com/gold";
+
 /* =================== NAVBAR ======================= */
 const navToggle = document.getElementById("navToggle");
 const navMenu = document.getElementById("navMenu");
@@ -386,3 +388,4 @@ investmentGoldTypeEl?.addEventListener("change", calculateInvestment);
 
 /* Initialize */
 calculateInvestment();
+
