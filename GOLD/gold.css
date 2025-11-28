@@ -482,3 +482,15 @@ body.dark-theme {
 .theme-toggle-btn:hover {
     box-shadow: var(--shadow-in);
 }
+
+
+/* Fix table overflow — scoped ONLY to table wrapper */
+.table-wrapper table {
+    width: max-content !important;
+    min-width: 100%;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
