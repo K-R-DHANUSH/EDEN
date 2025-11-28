@@ -1,3 +1,6 @@
+/* ----------- FIXED BACKEND URL ----------- */
+const API_URL = "https://eden-m2qz.onrender.com/gold";
+
 /* =================== NAVBAR ======================= */
 const navToggle = document.getElementById("navToggle");
 const navMenu = document.getElementById("navMenu");
@@ -21,9 +24,6 @@ function preventNegative(input) {
         input.value = "";
     }
 }
-
-/* ----------- FIXED BACKEND URL ----------- */
-const API_URL = "https://eden-m2qz.onrender.com/gold";
 
 /* Fetch Rates */
 async function fetchGoldRates() {
@@ -386,5 +386,6 @@ investmentGoldTypeEl?.addEventListener("change", calculateInvestment);
 
 /* Initialize */
 calculateInvestment();
+
 
 
