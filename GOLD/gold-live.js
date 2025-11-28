@@ -78,6 +78,17 @@ const investmentAmountEl = document.getElementById("investmentAmount");
 const tenureYearsEl = document.getElementById("tenureYears");
 const investmentGoldTypeEl = document.getElementById("investmentGoldType");
 
+tenureYearsEl.addEventListener("input", () => {
+    const val = Number(tenureYearsEl.value);
+
+    if (val > 10) {
+        tenureYearsEl.value = 10;
+        alert("Maximum tenure is 10 years.");
+    }
+
+    calculateInvestment();
+});
+
 const valNum = el => (el ? Number(el.value || 0) : 0);
 
 /* =================== LUMPSUM MANAGEMENT ====================== */
@@ -402,5 +413,6 @@ document.getElementById("themeToggle").addEventListener("click", () => {
 
 // Set DEFAULT icon (because default theme = LIGHT)
 document.getElementById("themeToggle").textContent = "☀️";
+
 
 
