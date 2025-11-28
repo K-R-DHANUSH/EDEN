@@ -25,7 +25,7 @@ function preventNegative(input) {
 /* Fetch Rates */
 async function fetchGoldRates() {
     try {
-        const res = await fetch("http://localhost:3000/gold");
+        const res = await fetch("/gold");
         const data = await res.json();
 
         live24K = Number(data.price_gram_24k) || 0;
@@ -383,3 +383,4 @@ investmentGoldTypeEl?.addEventListener("change", calculateInvestment);
 
 /* Initialize */
 calculateInvestment();
+
