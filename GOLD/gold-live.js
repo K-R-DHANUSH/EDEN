@@ -389,3 +389,18 @@ investmentGoldTypeEl?.addEventListener("change", calculateInvestment);
 
 /* Initialize */
 calculateInvestment();
+
+
+// Theme Toggle
+document.getElementById("themeToggle").addEventListener("click", () => {
+
+    document.body.classList.toggle("dark-theme");
+
+    const btn = document.getElementById("themeToggle");
+    btn.textContent = document.body.classList.contains("dark-theme") ? "🌙" : "☀️";
+});
+
+// Set DEFAULT icon (because default theme = LIGHT)
+document.getElementById("themeToggle").textContent = "☀️";
+
+
