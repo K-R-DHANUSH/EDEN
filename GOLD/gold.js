@@ -14,7 +14,7 @@ let investmentChart = null;
 let lumpsumEntries = [];
 let periodicEntries = [];
 
-/* Prevent negative inputs globally */
+/* Prevent negative values */
 function preventNegative(input) {
     if (Number(input.value) < 0) {
         alert("Negative values are not allowed.");
@@ -22,10 +22,13 @@ function preventNegative(input) {
     }
 }
 
+/* ----------- FIXED BACKEND URL ----------- */
+const API_URL = "https://eden-m2qz.onrender.com/gold";
+
 /* Fetch Rates */
 async function fetchGoldRates() {
     try {
-        const res = await fetch("/gold");
+        const res = await fetch(API_URL);
         const data = await res.json();
 
         live24K = Number(data.price_gram_24k) || 0;
@@ -56,14 +59,14 @@ function getRate() {
 function calculateFromAmount() {
     preventNegative(amountField);
     const rate = getRate();
-    if (amountField.value === "" || rate === 0) return (gramsField.value = "");
+    if (!amountField.value || rate === 0) return gramsField.value = "";
     gramsField.value = (Number(amountField.value) / rate).toFixed(2);
 }
 
 function calculateFromGrams() {
     preventNegative(gramsField);
     const rate = getRate();
-    if (gramsField.value === "" || rate === 0) return (amountField.value = "");
+    if (!gramsField.value || rate === 0) return amountField.value = "";
     amountField.value = (Number(gramsField.value) * rate).toFixed(2);
 }
 
@@ -383,4 +386,3 @@ investmentGoldTypeEl?.addEventListener("change", calculateInvestment);
 
 /* Initialize */
 calculateInvestment();
-
