@@ -1,56 +1,196 @@
-body {
-    background: rgb(198, 218, 218);
+/* ==========================================================
+   GLOBAL THEME VARIABLES (Day Mode = Default)
+   ========================================================== */
+
+:root {
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --border: #d0d7e3;
+    --text: #1d2433;
+    --text-dim: #3b4758;
+
+    --accent: #1e40af;       /* dark blue */
+    --accent-dark: #162d7a;
+
+    --shadow-out: 6px 6px 12px rgba(0,0,0,0.1),
+                  -6px -6px 12px rgba(255,255,255,0.8);
+
+    --shadow-in: inset 4px 4px 10px rgba(0,0,0,0.08),
+                 inset -4px -4px 10px rgba(255,255,255,0.4);
 }
+
+/* ==========================================================
+   NIGHT THEME
+   ========================================================== */
+
+body.dark-theme {
+    --bg: #1e2530;
+    --card: #28303d;
+    --border: #323b49;
+    --text: #e8edf3;
+    --text-dim: #a8b3c3;
+
+    --accent: #c65454;         /* red accent */
+    --accent-dark: #9e3f3f;
+
+    --shadow-out: 10px 10px 18px #161b23,
+                   -10px -10px 18px #26303d;
+
+    --shadow-in: inset 5px 5px 10px #161b23,
+                 inset -5px -5px 10px #2d3644;
+}
+
+/* ==========================================================
+   GLOBAL BODY STYLE
+   ========================================================== */
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+    overflow-x: hidden;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ==========================================================
+   HEADER LOGO
+   ========================================================== */
 
 .header-logo {
     display: block;
-    margin: 0 auto;         /* centers the image */
-    width: 370px;           /* adjust size */
-    height: 100px;
-    padding: 10px 0;
+    margin: 25px auto;
+    width: 300px;
+    height: auto;
+    opacity: 0.95;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
 }
 
-/* NAVBAR STYLING */
-/* navbar container */
+/* ==========================================================
+   NAVBAR (NEUMORPHIC)
+   ========================================================== */
+
 .navbar {
-    background-color: #9faba0;
-    padding: 1px;
+    background: var(--card);
+    padding: 18px;
+    margin: 20px auto;
+    width: 92%;
+    max-width: 900px;
+    border-radius: 18px;
+    box-shadow: var(--shadow-out);
     position: relative;
 }
 
-/* hamburger icon */
-.nav-toggle {
-    font-size: 28px;
-    color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
+/* NAV HEADER (for toggle + theme button later) */
+.nav-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* menu list styling */
+/* Hamburger Icon */
+.nav-toggle {
+    font-size: 28px;
+    border: none;
+    background: var(--card);
+    color: var(--text);
+    padding: 10px 14px;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: var(--shadow-out);
+    transition: 0.3s ease;
+}
+
+.nav-toggle:hover {
+    box-shadow: var(--shadow-in);
+}
+
+/* ==========================================================
+   MENU DROPDOWN
+   ========================================================== */
+
 .nav-menu {
     list-style: none;
     padding: 0;
-    margin: 0;
-    display: none; /* hidden at start */
+    margin-top: 25px;
+    display: none;
     flex-direction: column;
-    gap: 15px;
-    background-color: #29272740;
-    padding: 15px 10px;
+    gap: 14px;
+
+    background: var(--card);
+    padding: 20px 20px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-in);
 }
 
-.nav-menu li a {
-    text-decoration: none;
-    color: white;
-    font-size: 20px;
-}
-
-.nav-menu li a:hover {
-    color: #833734;
-}
-
-/* when active, show menu */
+/* Show menu when active */
 .nav-menu.active {
     display: flex;
 }
 
+.nav-menu li a {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 20px;
+    padding: 10px 5px;
+    transition: 0.2s ease;
+    border-radius: 8px;
+}
+
+.nav-menu li a:hover {
+    color: var(--accent);
+}
+
+/* ==========================================================
+   MOBILE RESPONSIVE
+   ========================================================== */
+@media (max-width: 600px) {
+
+    .header-logo {
+        width: 240px;
+    }
+
+    .nav-menu li a {
+        font-size: 18px;
+    }
+}
+
+.nav-header {
+    display: flex;
+    flex-direction: column; /* stack elements vertically */
+    align-items: center;
+    gap: 12px; /* spacing */
+}
+
+.toggle-wrapper {
+    margin-top: 6px;
+}
+
+body.light-theme .theme-toggle-btn,
+body.light-theme .nav-toggle {
+    color: #0a2a6a !important;   /* dark blue icon */
+}
+body.light-theme #themeToggle {
+    color: #0a2a6a !important;
+}
+
+body.dark-theme .theme-toggle-btn,
+body.dark-theme .nav-toggle {
+    color: #e8edf3 !important;
+}
+
+/* Universal theme toggle style (matches your reference) */
+.theme-toggle-btn {
+    background: var(--card);
+    border: none;
+    padding: 10px 14px;
+    border-radius: 12px;
+    color: var(--text);
+    box-shadow: var(--shadow-out);
+    cursor: pointer;
+    font-size: 20px;
+    transition: 0.3s ease-in-out;
+}
+
+.theme-toggle-btn:hover {
+    box-shadow: var(--shadow-in);
+}
