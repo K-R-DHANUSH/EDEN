@@ -180,7 +180,7 @@ body {
 
 /* FIXED ALIGNMENT */
 table {
-    width: 50%;
+    width: 100% !important;
     border-collapse: collapse;
     text-align: center;
 }
@@ -241,9 +241,14 @@ select {
 }
 
 /* FIXED CALENDAR ICON WHITE */
-input[type="month"]::-webkit-calendar-picker-indicator {
+/* LIGHT MODE → dark icon */
+body.light-theme input[type="month"]::-webkit-calendar-picker-indicator {
+    filter: invert(0) brightness(0.2);
+}
+
+/* DARK MODE → white icon */
+body.dark-theme input[type="month"]::-webkit-calendar-picker-indicator {
     filter: invert(1) brightness(2);
-    opacity: 1 !important;
 }
 
 /* ==========================================================
@@ -483,7 +488,6 @@ body.dark-theme {
     box-shadow: var(--shadow-in);
 }
 
-
 /* Fix table overflow — scoped ONLY to table wrapper */
 .table-wrapper table {
     width: max-content !important;
@@ -493,4 +497,218 @@ body.dark-theme {
 .table-wrapper {
     width: 100%;
     overflow-x: auto;
+}
+
+/* Restore result box layout */
+#resultBox {
+    width: auto !important;
+    max-width: 600px !important;
+    display: block !important;
+    white-space: normal !important;
+}
+
+/* ---------------------------
+   BUTTON TEXT / ICON THEME FIX
+   - Targets "day" when body DOES NOT have .dark-theme
+   - Makes ONLY the button text white, keeps icons black.
+   - Also covers common button classes (.download-btn, .btn)
+   --------------------------- */
+
+/* 1) Make button text white in day mode (covers nested <span> too) */
+body:not(.dark-theme) button,
+body:not(.dark-theme) .download-btn,
+body:not(.dark-theme) .btn {
+  color: #ffffff !important;
+}
+
+/* If the label is wrapped in a span inside the button, make sure it's white */
+body:not(.dark-theme) button span,
+body:not(.dark-theme) .download-btn span,
+body:not(.dark-theme) .btn span {
+  color: #ffffff !important;
+}
+
+/* 2) Force icons to be BLACK in day mode (exclude emoji/text icons) */
+body:not(.dark-theme) button i,
+body:not(.dark-theme) .download-btn i,
+body:not(.dark-theme) .btn i,
+body:not(.dark-theme) button svg,
+body:not(.dark-theme) .download-btn svg,
+body:not(.dark-theme) .btn svg {
+  color: #000000 !important;
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+
+/* 3) Night mode — make icons white (leave text as your theme handles it) */
+body.dark-theme button i,
+body.dark-theme .download-btn i,
+body.dark-theme .btn i,
+body.dark-theme button svg,
+body.dark-theme .download-btn svg,
+body.dark-theme .btn svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* MENU ICON (Hamburger) */
+.nav-toggle i,
+.nav-toggle svg {
+    transition: 0.2s ease-in-out;
+}
+
+/* LIGHT MODE → dark blue icon */
+body.light-theme .nav-toggle i,
+body.light-theme .nav-toggle svg {
+    color: #0a2a6a !important;
+    fill: #0a2a6a !important;
+}
+
+/* DARK MODE → white icon */
+body.dark-theme .nav-toggle i,
+body.dark-theme .nav-toggle svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+
+body.light-theme .nav-toggle {
+    color: #0a2a6a !important; /* dark blue */
+}
+
+body.dark-theme .nav-toggle {
+    color: #ffffff !important;
+}
+
+
+/* Fix menu icon color in LIGHT MODE */
+body.light-theme #navToggle {
+    color: #0a2a6a !important; /* dark blue icon in day mode */
+}
+
+/* Fix menu icon color in DARK MODE */
+body.dark-theme #navToggle {
+    color: #ffffff !important; /* white icon in night mode */
+}
+
+/* ==========================================================
+   FINAL FIXES — Safe Patch (Does NOT break existing theme)
+   ========================================================== */
+
+/* ----------------------------------------------
+   1) Hamburger Menu Icon (☰)
+   ---------------------------------------------- */
+
+/* Base styling (applies even if no theme is active) */
+#navToggle {
+    font-size: 28px;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    padding: 10px 14px;
+    line-height: 1;
+    transition: background .2s ease, color .2s ease;
+    color: #0a2a6a !important;   /* visible on light background */
+}
+
+/* Light Mode → Dark blue icon */
+body.light-theme #navToggle {
+    color: #0a2a6a !important;
+}
+
+/* Dark Mode → White icon */
+body.dark-theme #navToggle {
+    color: #ffffff !important;
+}
+
+/* Hover effect stays consistent in both modes */
+#navToggle:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+}
+
+/* ----------------------------------------------
+   2) Calendar / Month Picker Icon Visibility
+   ---------------------------------------------- */
+
+/* Light Mode → Dark icon */
+body.light-theme input[type="month"]::-webkit-calendar-picker-indicator {
+    filter: invert(0) brightness(0.25) !important;
+    opacity: 1 !important;
+}
+
+/* Dark Mode → White icon */
+body.dark-theme input[type="month"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(2) !important;
+    opacity: 1 !important;
+}
+
+/* ----------------------------------------------
+   3) Button Text in Day Mode → White
+   (Does NOT touch icons — only text!)
+   ---------------------------------------------- */
+
+body.light-theme button,
+body.light-theme .download-btn,
+body.light-theme .btn {
+    color: #ffffff !important;
+}
+
+/* If text wrapped inside a <span> */
+body.light-theme button span,
+body.light-theme .download-btn span,
+body.light-theme .btn span {
+    color: #ffffff !important;
+}
+
+/* Icons remain black in day mode */
+body.light-theme button i,
+body.light-theme .download-btn i,
+body.light-theme .btn i,
+body.light-theme button svg,
+body.light-theme .download-btn svg,
+body.light-theme .btn svg {
+    color: #000000 !important;
+    fill: #000000 !important;
+}
+
+/* Night mode — make icons white */
+body.dark-theme button i,
+body.dark-theme .download-btn i,
+body.dark-theme .btn i,
+body.dark-theme button svg,
+body.dark-theme .download-btn svg,
+body.dark-theme .btn svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+
+/* ----------------------------------------------
+   4) FORCE fallback theme (if no class present)
+   ---------------------------------------------- */
+body:not(.light-theme):not(.dark-theme) #navToggle {
+    color: #0a2a6a !important;
+}
+
+/* Strong, specific rule for the calculator heading */
+#goldCalcTitle {
+  display: block;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--accent);
+  margin: 0 0 18px;
+  white-space: normal !important;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  #goldCalcTitle {
+    font-size: 20px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 14px;
+  }
 }
