@@ -49,8 +49,20 @@ fetchGoldRates();
 /* =================== CALCULATOR (Amount ↔ Grams) ====================== */
 const amountField = document.getElementById("amountField");
 const gramsField = document.getElementById("gramsField");
+const calcGoldType = document.getElementById("calcGoldType");
 
 let selectedRate = "24k";
+let lastInput = "amount"; // tracks latest user input
+
+calcGoldType?.addEventListener("change", () => {
+    selectedRate = calcGoldType.value;
+
+    if (lastInput === "amount") {
+        calculateFromAmount();
+    } else {
+        calculateFromGrams();
+    }
+});
 
 function getRate() {
     return selectedRate === "24k" ? live24K : live22K;
@@ -59,19 +71,32 @@ function getRate() {
 function calculateFromAmount() {
     preventNegative(amountField);
     const rate = getRate();
-    if (!amountField.value || rate === 0) return (gramsField.value = "");
+
+    if (amountField.value === "" || rate === 0)
+        return (gramsField.value = "");
+
     gramsField.value = (Number(amountField.value) / rate).toFixed(2);
 }
 
 function calculateFromGrams() {
     preventNegative(gramsField);
     const rate = getRate();
-    if (!gramsField.value || rate === 0) return (amountField.value = "");
+
+    if (gramsField.value === "" || rate === 0)
+        return (amountField.value = "");
+
     amountField.value = (Number(gramsField.value) * rate).toFixed(2);
 }
 
-amountField?.addEventListener("input", calculateFromAmount);
-gramsField?.addEventListener("input", calculateFromGrams);
+amountField?.addEventListener("input", () => {
+    lastInput = "amount";
+    calculateFromAmount();
+});
+
+gramsField?.addEventListener("input", () => {
+    lastInput = "grams";
+    calculateFromGrams();
+});
 
 /* =================== MAIN INVESTMENT INPUTS ====================== */
 const investmentAmountEl = document.getElementById("investmentAmount");
@@ -256,11 +281,8 @@ function calculateInvestment() {
             if (pe.frequency === "monthly") {
                 if (yyyymm_gte(loopMonth, pe.start)) periodicAmt += pe.amount;
             } else {
-                if (
-                    loopMonth.slice(5, 7) === pe.start.slice(5, 7) &&
-                    yyyymm_gte(loopMonth, pe.start)
-                ) {
-                    periodicAmt += pe.amount;
+                if (loopMonth.slice(5, 7) === pe.start.slice(5, 7)) {
+                    if (yyyymm_gte(loopMonth, pe.start)) periodicAmt += pe.amount;
                 }
             }
         });
@@ -413,6 +435,5 @@ document.getElementById("themeToggle").addEventListener("click", () => {
 
 // Set DEFAULT icon (because default theme = LIGHT)
 document.getElementById("themeToggle").textContent = "☀️";
-
 
 
